@@ -1,0 +1,1 @@
+rootProject.name = "ro.jf.stuff.stuff-service"
