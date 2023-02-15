@@ -10,7 +10,7 @@ plugins {
 group = "ro.jf.stuff"
 version = "0.0.1"
 application {
-    mainClass.set("ro.jf.stuff.ApplicationKt")
+    mainClass.set("io.ktor.server.netty.EngineMain.main")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
@@ -25,5 +25,6 @@ dependencies {
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
+    testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }

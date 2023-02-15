@@ -1,4 +1,4 @@
-package ro.jf.stuff.controller
+package ro.jf.stuff.api
 
 import io.ktor.server.application.Application
 import io.ktor.server.application.call

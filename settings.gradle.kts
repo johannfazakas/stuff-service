@@ -1,1 +1,1 @@
-rootProject.name = "ro.jf.stuff.stuff-service"
+rootProject.name = "stuff-service"

@@ -1,14 +1,10 @@
 package ro.jf.stuff
 
 import io.ktor.server.application.Application
-import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
-import ro.jf.stuff.controller.configureStuffRouting
+import io.ktor.server.netty.EngineMain
+import ro.jf.stuff.api.configureStuffRouting
 
-fun main() {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
-        .start(wait = true)
-}
+fun main(): Unit = EngineMain.main(emptyArray())
 
 fun Application.module() {
     configureStuffRouting()
