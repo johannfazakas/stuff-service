@@ -14,6 +14,7 @@ import ro.jf.stuff.api.transfer.CreateStuffTO
 import ro.jf.stuff.api.transfer.StuffTO
 import ro.jf.stuff.api.transfer.UpdateStuffTO
 import ro.jf.stuff.utils.jsonClient
+import java.util.UUID.randomUUID
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -35,11 +36,13 @@ class StuffApiTest {
     @Test
     fun `should get stuff by id`(): Unit = testApplication {
         val client = jsonClient()
+        val stuffId = randomUUID()
 
-        val response = client.get("/api/v1/stuff/123")
+        val response = client.get("/api/v1/stuff/$stuffId")
 
         assertEquals(HttpStatusCode.OK, response.status)
         val stuff = response.body<StuffTO>()
+        assertEquals(stuffId.toString(), stuff.id)
         assertEquals("Stuff", stuff.name)
     }
 
@@ -66,25 +69,28 @@ class StuffApiTest {
     @Test
     fun `should update stuff`() = testApplication {
         val client = jsonClient()
+        val stuffId = randomUUID()
         val updateStuffTO = UpdateStuffTO(
             name = "Updated name"
         )
 
-        val response = client.put("/api/v1/stuff/123") {
+        val response = client.put("/api/v1/stuff/$stuffId") {
             contentType(ContentType.Application.Json)
             setBody(updateStuffTO)
         }
 
         assertEquals(HttpStatusCode.OK, response.status)
         val stuff = response.body<StuffTO>()
+        assertEquals(stuffId.toString(), stuff.id)
         assertEquals("Updated name", stuff.name)
     }
 
     @Test
     fun `should delete stuff`() = testApplication {
         val client = jsonClient()
+        val stuffId = randomUUID()
 
-        val response = client.delete("/api/v1/stuff/123")
+        val response = client.delete("/api/v1/stuff/$stuffId")
 
         assertEquals(HttpStatusCode.NoContent, response.status)
         assertTrue(response.body<String>().isEmpty())

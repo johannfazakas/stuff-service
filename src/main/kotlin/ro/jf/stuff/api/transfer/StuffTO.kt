@@ -1,11 +1,12 @@
 package ro.jf.stuff.api.transfer
 
 import kotlinx.serialization.Serializable
+import java.util.UUID
 import java.util.UUID.randomUUID
 
 @Serializable
 data class StuffTO(
-    val id: Int,
+    val id: String,
     val name: String,
     val value: Int,
     val flag: Boolean,
@@ -14,11 +15,13 @@ data class StuffTO(
 ) {
     companion object {
         fun random() = StuffTO(
-            id = randomUUID().hashCode(),
+            id = randomUUID().toString(),
             name = "Stuff",
             value = 123,
             flag = true,
             list = listOf("a", "b", "c"),
         )
+
+        fun withId(id: UUID) = random().copy(id = id.toString())
     }
 }
