@@ -11,6 +11,7 @@ import io.ktor.server.routing.post
 import io.ktor.server.routing.put
 import io.ktor.server.routing.route
 import io.ktor.server.routing.routing
+import org.koin.ktor.ext.get
 import ro.jf.stuff.api.transfer.CreateStuffTO
 import ro.jf.stuff.api.transfer.StuffTO
 import ro.jf.stuff.api.transfer.UpdateStuffTO
@@ -19,11 +20,9 @@ import ro.jf.stuff.utils.toUUID
 
 private const val STUFF_ID = "stuffId"
 
-fun Application.stuffRoutes() {
-
-    // TODO(Johann) inject actual stuffService
-    val stuffService = StuffService()
-
+fun Application.stuffRoutes(
+    stuffService: StuffService = get()
+) {
     routing {
         route("/api/v1/stuff") {
             get {
