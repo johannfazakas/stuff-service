@@ -14,6 +14,7 @@ import ro.jf.stuff.api.transfer.CreateStuffTO
 import ro.jf.stuff.api.transfer.StuffTO
 import ro.jf.stuff.api.transfer.UpdateStuffTO
 import ro.jf.stuff.utils.jsonClient
+import java.time.LocalDateTime
 import java.util.UUID.randomUUID
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -42,7 +43,7 @@ class StuffApiTest {
 
         assertEquals(HttpStatusCode.OK, response.status)
         val stuff = response.body<StuffTO>()
-        assertEquals(stuffId.toString(), stuff.id)
+        assertEquals(stuffId, stuff.id)
         assertEquals("Stuff", stuff.name)
     }
 
@@ -53,6 +54,7 @@ class StuffApiTest {
             name = "Test name",
             value = 123,
             flag = true,
+            dateTime = LocalDateTime.now(),
             list = listOf("a", "b"),
         )
 
@@ -81,7 +83,7 @@ class StuffApiTest {
 
         assertEquals(HttpStatusCode.OK, response.status)
         val stuff = response.body<StuffTO>()
-        assertEquals(stuffId.toString(), stuff.id)
+        assertEquals(stuffId, stuff.id)
         assertEquals("Updated name", stuff.name)
     }
 

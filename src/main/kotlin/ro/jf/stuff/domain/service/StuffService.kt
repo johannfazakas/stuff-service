@@ -7,9 +7,9 @@ import java.util.UUID
 
 class StuffService {
 
-    private val db = generateSequence { Stuff.random() }
+    private val db = generateSequence(Stuff::random)
         .take(3)
-        .associateBy { it.id }
+        .associateBy(Stuff::id)
         .toMutableMap()
 
     fun list() = db.values.toList()
