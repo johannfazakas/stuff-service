@@ -1,4 +1,4 @@
-package ro.jf.stuff.api.utils
+package ro.jf.stuff.utils
 
 import java.lang.IllegalArgumentException
 import java.util.UUID

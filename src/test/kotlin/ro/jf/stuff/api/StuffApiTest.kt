@@ -29,14 +29,14 @@ class StuffApiTest {
 
         assertEquals(HttpStatusCode.OK, response.status)
         val stuff = response.body<List<StuffTO>>()
-        assertEquals(2, stuff.size)
+        assertEquals(3, stuff.size)
         assertEquals("Stuff", stuff[0].name)
     }
 
     @Test
     fun `should get stuff by id`(): Unit = testApplication {
         val client = jsonClient()
-        val stuffId = randomUUID()
+        val stuffId = client.get("/api/v1/stuff").body<List<StuffTO>>()[0].id
 
         val response = client.get("/api/v1/stuff/$stuffId")
 
@@ -69,7 +69,7 @@ class StuffApiTest {
     @Test
     fun `should update stuff`() = testApplication {
         val client = jsonClient()
-        val stuffId = randomUUID()
+        val stuffId = client.get("/api/v1/stuff").body<List<StuffTO>>()[0].id
         val updateStuffTO = UpdateStuffTO(
             name = "Updated name"
         )

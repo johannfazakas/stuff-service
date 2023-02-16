@@ -5,7 +5,7 @@ import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.netty.EngineMain
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
-import ro.jf.stuff.api.configureStuffRouting
+import ro.jf.stuff.api.stuffRoutes
 
 fun main(): Unit = EngineMain.main(emptyArray())
 
@@ -13,5 +13,5 @@ fun Application.module() {
     install(ContentNegotiation) {
         json()
     }
-    configureStuffRouting()
+    stuffRoutes()
 }

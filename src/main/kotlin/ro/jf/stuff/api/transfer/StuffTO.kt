@@ -1,27 +1,26 @@
 package ro.jf.stuff.api.transfer
 
 import kotlinx.serialization.Serializable
-import java.util.UUID
-import java.util.UUID.randomUUID
+import ro.jf.stuff.domain.model.Stuff
 
 @Serializable
 data class StuffTO(
+    // TODO(Johann) use UUID instead of String
     val id: String,
     val name: String,
     val value: Int,
     val flag: Boolean,
+    // TODO(Johann) serialize LocalDateTime
 //    val date: LocalDateTime,
     val list: List<String>,
 ) {
     companion object {
-        fun random() = StuffTO(
-            id = randomUUID().toString(),
-            name = "Stuff",
-            value = 123,
-            flag = true,
-            list = listOf("a", "b", "c"),
+        fun fromDomain(stuff: Stuff) = StuffTO(
+            id = stuff.id.toString(),
+            name = stuff.name,
+            value = stuff.value,
+            flag = stuff.flag,
+            list = stuff.list,
         )
-
-        fun withId(id: UUID) = random().copy(id = id.toString())
     }
 }
